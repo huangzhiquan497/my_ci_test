@@ -12,7 +12,7 @@ namespace Tests
         [Test]
         public void TestSimplePasses()
         {
-            Assert.Pass();
+            Assert.Fail();
         }
     }
 }
