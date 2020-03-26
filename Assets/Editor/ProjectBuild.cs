@@ -24,6 +24,9 @@ public class ProjectBuild : Editor
     {
         Function.DeleteFolder(Path.Combine(Directory.GetCurrentDirectory(), "Build"));
 
+        var buildTarget = EditorUserBuildSettings.activeBuildTarget;
+        var buildTargetGroup = BuildTargetGroup.Android;
+        EditorUserBuildSettings.SwitchActiveBuildTarget(buildTargetGroup, buildTarget);
 
         // Function.CopyDirectory(Application.dataPath + "/my_ci-test", Application.dataPath + "/Plugins/Android");
         // PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.Android, "USE_SHARE");
