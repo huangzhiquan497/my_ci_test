@@ -7,7 +7,7 @@ fi
 UNITY_PATH=/Volumes/ExtSSD/UnityApp/2019.3.5f1/Unity.app/Contents/MacOS/Unity
  
 #游戏程序路径#
-PROJECT_PATH=/Volumes/ExtSSD/AppLibrary/Jenkins/workspace/ci_test
+PROJECT_PATH=/Volumes/ExtSSD/Project/my_ci_test
 echo "version = $version"
  
 #在Unity中构建apk#
