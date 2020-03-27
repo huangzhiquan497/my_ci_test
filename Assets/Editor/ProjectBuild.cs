@@ -22,18 +22,18 @@ public class ProjectBuild : Editor
 
     public static void BuildForAndroid()
     {
-        Function.DeleteFolder(Path.Combine(Directory.GetCurrentDirectory(), "Build"));
-
         var buildTarget = EditorUserBuildSettings.activeBuildTarget;
         var buildTargetGroup = BuildTargetGroup.Android;
         EditorUserBuildSettings.SwitchActiveBuildTarget(buildTargetGroup, buildTarget);
 
-        // Function.CopyDirectory(Application.dataPath + "/my_ci-test", Application.dataPath + "/Plugins/Android");
-        // PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.Android, "USE_SHARE");
+        var dir = Path.Combine(Directory.GetCurrentDirectory(), "Build");
+        if (!Directory.Exists(dir))
+        {
+            Directory.CreateDirectory(dir);
+        }
 
-
-        string path = Path.Combine(Directory.GetCurrentDirectory(), "Build") + "/" + Function.Version.Replace(".", "") +
-                      ".apk";
+        var path = dir + "/" + Function.Version.Replace(".", "") +
+                   ".apk";
         BuildPipeline.BuildPlayer(GetBuildScenes(), path, BuildTarget.Android, BuildOptions.None);
     }
 }
