@@ -288,7 +288,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: test build
+          m_StringArgument: test build 7777
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1257473147
@@ -570,7 +570,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: 555555
 --- !u!222 &1634947068
 CanvasRenderer:
   m_ObjectHideFlags: 0
