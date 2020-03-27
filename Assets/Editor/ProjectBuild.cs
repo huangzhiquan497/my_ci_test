@@ -32,8 +32,7 @@ public class ProjectBuild : Editor
             Directory.CreateDirectory(dir);
         }
 
-        var path = dir + "/" + Function.Version.Replace(".", "") +
-                   ".apk";
+        var path = dir + "/" + Function.Version.Replace(".", "") + ".apk";
         BuildPipeline.BuildPlayer(GetBuildScenes(), path, BuildTarget.Android, BuildOptions.None);
     }
 }
