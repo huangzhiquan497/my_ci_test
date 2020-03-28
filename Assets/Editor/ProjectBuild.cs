@@ -18,7 +18,7 @@ public class ProjectBuild : Editor
         if (!File.Exists(_build_version_file)) return "100";
 
         var text = File.ReadAllText(_build_version_file);
-        
+
         var environmentVariables = Environment.GetEnvironmentVariables();
         var originVersion = Convert.ToInt32(text);
         var buildNumber = environmentVariables.Contains("BUILD_NUMBER")
@@ -29,7 +29,19 @@ public class ProjectBuild : Editor
 
     private static void UpdateBuildVersion(string buildNumber)
     {
-        if (!File.Exists(_build_version_file)) File.Create(_build_version_file);
+        if (!File.Exists(_build_version_file))
+        {
+            try
+            {
+                File.Create(_build_version_file);
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarning(e);
+            }
+        }
+
+
         File.WriteAllText(_build_version_file, buildNumber);
     }
 
