@@ -1,7 +1,4 @@
-if [ $# != 1 ];then  
-    echo "需要一个参数。 参数是build version"  
-    exit     
-fi  
+ echo "start"  
  
 UNITY程序的路径#
 UNITY_PATH=/Volumes/ExtSSD/UnityApp/2019.3.5f1/Unity.app/Contents/MacOS/Unity
@@ -10,9 +7,10 @@ UNITY_PATH=/Volumes/ExtSSD/UnityApp/2019.3.5f1/Unity.app/Contents/MacOS/Unity
 export PROJECT_PATH=$(dirname $(dirname $0))
 
 echo $PROJECT_PATH
-echo "version = $version"
- 
+
+export logPath=$(dirname $(dirname $0))/last_build_android.log
+
 在Unity中构建apk#
-$UNITY_PATH -projectPath $PROJECT_PATH -executeMethod ProjectBuild.BuildForAndroid version-"$version" -quit
+$UNITY_PATH -quit -batchmode -projectPath $PROJECT_PATH -executeMethod ProjectBuild.BuildForAndroid -logFile
  
 echo "Apk生成完毕"

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,6 +7,30 @@ using UnityEngine;
 
 public class ProjectBuild : Editor
 {
+    private static string PackageName => "hzq_ci_test"; // todo get package name
+    private static string AppVersion => "202008"; // todo
+
+    private static string GetBuildVersion()
+    {
+        var text = Resources.Load<TextAsset>("build_version")?.text;
+
+        if (text == null) return "0";
+
+        var environmentVariables = Environment.GetEnvironmentVariables();
+        var originVersion = Convert.ToInt32(text);
+        var buildNumber = environmentVariables.Contains("BUILD_NUMBER")
+            ? environmentVariables["BUILD_NUMBER"].ToString()
+            : (originVersion + 1).ToString();
+        return buildNumber;
+    }
+
+    private static void UpdateBuildVersion(string buildNumber)
+    {
+        File.WriteAllText(Application.dataPath + "/BuileData/Resources/build_version.txt", buildNumber);
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
+    }
+
     static string[] GetBuildScenes()
     {
         List<string> names = new List<string>();
@@ -22,17 +47,69 @@ public class ProjectBuild : Editor
 
     public static void BuildForAndroid()
     {
-        var buildTarget = EditorUserBuildSettings.activeBuildTarget;
-        var buildTargetGroup = BuildTargetGroup.Android;
-        EditorUserBuildSettings.SwitchActiveBuildTarget(buildTargetGroup, buildTarget);
-
-        var dir = Path.Combine(Directory.GetCurrentDirectory(), "Build");
-        if (!Directory.Exists(dir))
+        if (EditorUserBuildSettings.activeBuildTarget != BuildTarget.Android)
         {
-            Directory.CreateDirectory(dir);
+            var buildTarget = EditorUserBuildSettings.activeBuildTarget;
+            var buildTargetGroup = BuildTargetGroup.Android;
+            EditorUserBuildSettings.SwitchActiveBuildTarget(buildTargetGroup, buildTarget);
         }
 
-        var path = dir + "/" + Function.Version.Replace(".", "") + ".apk";
-        BuildPipeline.BuildPlayer(GetBuildScenes(), path, BuildTarget.Android, BuildOptions.None);
+
+        var buildVersion = GetBuildVersion();
+        UpdateBuildVersion(buildVersion);
+
+        var dir = Path.Combine(Directory.GetCurrentDirectory(), "BuildApks");
+
+        if (Directory.Exists(dir)) Directory.Delete(dir, true);
+
+        Directory.CreateDirectory(dir);
+
+
+        var apkName = $"{PackageName}_v{AppVersion}_b{buildVersion}.apk";
+
+        var path = dir + "/" + apkName;
+
+        if (File.Exists(path)) File.Delete(path);
+        Build(path, BuildTarget.Android);
+    }
+
+    public static void BuildForIos()
+    {
+        if (EditorUserBuildSettings.activeBuildTarget != BuildTarget.iOS)
+        {
+            var buildTarget = EditorUserBuildSettings.activeBuildTarget;
+            var buildTargetGroup = BuildTargetGroup.iOS;
+            EditorUserBuildSettings.SwitchActiveBuildTarget(buildTargetGroup, buildTarget);
+        }
+
+
+        var buildVersion = GetBuildVersion();
+        UpdateBuildVersion(buildVersion);
+
+        var dir = Path.Combine(Directory.GetCurrentDirectory(), "BuildIpa");
+        
+        var path = dir + "/" + PackageName;
+
+        if (Directory.Exists(dir)) Directory.Delete(dir, true);
+
+        Directory.CreateDirectory(dir);
+        
+        Build(path, BuildTarget.iOS);
+    }
+
+    static void Build(string savePath, BuildTarget buildTarget)
+    {
+        var buildPlayerOptions = new BuildPlayerOptions
+        {
+            scenes = GetBuildScenes(),
+            locationPathName = savePath,
+            target = buildTarget,
+            options = BuildOptions.None
+        };
+
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
+        
+        BuildPipeline.BuildPlayer(buildPlayerOptions);
     }
 }
