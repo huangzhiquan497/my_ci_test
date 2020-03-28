@@ -20,7 +20,7 @@ public class ProjectBuild : Editor
         var text = File.ReadAllText(_build_version_file);
 
         var environmentVariables = Environment.GetEnvironmentVariables();
-        var originVersion = Convert.ToInt32(text);
+        var originVersion = text.ToInteger();
         var buildNumber = environmentVariables.Contains("BUILD_NUMBER")
             ? environmentVariables["BUILD_NUMBER"].ToString()
             : (originVersion + 1).ToString();
