@@ -8,10 +8,11 @@ export PROJECT_PATH=$(dirname $(dirname $0))
 
 echo $PROJECT_PATH
 
-export UnityLog =$(dirname $(dirname $0))/PythonToolsForUnity/venv/src/UnityLog.py
-export logPath=$(dirname $(dirname $0))/BuildLog/last_build_android.log
+export python_exe=${PROJECT_PATH}/PythonToolsForUnity/venv/bin/python3.7
+export UnityLog =$(PROJECT_PATH)/PythonToolsForUnity/venv/src/UnityLog.py
+export logPath=$(PROJECT_PATH)/BuildLog/last_build_android.log
 
 #在Unity中构建apk
-$UnityLog $UNITY_PATH -quit -batchmode -projectPath $PROJECT_PATH -executeMethod ProjectBuild.BuildForAndroid -logFile $logPath
+$python_exe $UnityLog $UNITY_PATH -quit -batchmode -projectPath $PROJECT_PATH -executeMethod ProjectBuild.BuildForAndroid -logFile $logPath
  
 echo "Apk生成完毕"
