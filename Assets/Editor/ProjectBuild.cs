@@ -10,12 +10,15 @@ public class ProjectBuild : Editor
     private static string PackageName => "hzq_ci_test"; // todo get package name
     private static string AppVersion => "202008"; // todo
 
+    private static readonly string _build_version_file =
+        Directory.GetCurrentDirectory() + "/BuildData/build_version.txt";
+
     private static string GetBuildVersion()
     {
-        var text = Resources.Load<TextAsset>("build_version")?.text;
+        if (!File.Exists(_build_version_file)) return "100";
 
-        if (text == null) return "0";
-
+        var text = File.ReadAllText(_build_version_file);
+        
         var environmentVariables = Environment.GetEnvironmentVariables();
         var originVersion = Convert.ToInt32(text);
         var buildNumber = environmentVariables.Contains("BUILD_NUMBER")
@@ -26,9 +29,8 @@ public class ProjectBuild : Editor
 
     private static void UpdateBuildVersion(string buildNumber)
     {
-        File.WriteAllText(Application.dataPath + "/BuileData/Resources/build_version.txt", buildNumber);
-        AssetDatabase.SaveAssets();
-        AssetDatabase.Refresh();
+        if (!File.Exists(_build_version_file)) File.Create(_build_version_file);
+        File.WriteAllText(_build_version_file, buildNumber);
     }
 
     static string[] GetBuildScenes()
@@ -87,13 +89,13 @@ public class ProjectBuild : Editor
         UpdateBuildVersion(buildVersion);
 
         var dir = Path.Combine(Directory.GetCurrentDirectory(), "BuildIpa");
-        
+
         var path = dir + "/" + PackageName;
 
         if (Directory.Exists(dir)) Directory.Delete(dir, true);
 
         Directory.CreateDirectory(dir);
-        
+
         Build(path, BuildTarget.iOS);
     }
 
@@ -109,7 +111,7 @@ public class ProjectBuild : Editor
 
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
-        
+
         BuildPipeline.BuildPlayer(buildPlayerOptions);
     }
 }
