@@ -12,5 +12,3 @@ export logPath=$(dirname $(dirname $0))/BuildLog/last_build_ios.log
 
 #在Unity中构建apk
 $UNITY_PATH -quit -batchmode -projectPath $PROJECT_PATH -executeMethod ProjectBuild.BuildForIos -logFile $logPath
- 
-echo "Apk生成完毕"
