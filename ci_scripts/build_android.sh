@@ -1,7 +1,7 @@
  echo "start"  
  
 #UNITY程序的路径
-UNITY_PATH=/Volumes/ExtSSD/UnityApp/2019.3.9f1/Unity.app/Contents/MacOS/Unity
+UNITY_PATH=/Users/huili/UnityApp/2019.3.9f1/Unity.app/Contents/MacOS/Unity
  
 #游戏程序路径
 export PROJECT_PATH=$(dirname $(dirname $0))
