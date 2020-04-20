@@ -7,7 +7,7 @@ M_ARCHIVE_PATH=${PROJECT_PATH}/archive
 M_EXPORT_PATH=${PROJECT_PATH}/ipa
 cd ${M_XCODE_PATH}
 
-xcodebuild clean archive -scheme ${M_XCODE_NAME} -target ${M_XCODE_NAME} -archivePath ${M_ARCHIVE_PATH} -configuration Release
+xcodebuild clean archive -scheme ${M_XCODE_NAME} -target ${M_XCODE_NAME} -archivePath ${M_ARCHIVE_PATH} -configuration Release -allowProvisioningUpdates
 #PROVISIONING_PROFILE="${M_PROVISIONING_PROFILE}" CODE_SIGN_IDENTITY="${M_CODE_SIGN_IDENTITY}"
 
 xcodebuild -exportArchive -archivePath "${M_ARCHIVE_PATH}.xcarchive" -exportPath "${M_EXPORT_PATH}" -exportOptionsPlist "Info.plist" -allowProvisioningUpdates
