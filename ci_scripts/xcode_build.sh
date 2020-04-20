@@ -1,4 +1,4 @@
-M_PROVISIONING_PROFILE="71ccbdf6-4562-451e-be64-11487f52fff4" #证书配置
+M_PROVISIONING_PROFILE="11b48f0c-04af-46c0-9fbd-2d12529a3b5c" #证书配置
 M_CODE_SIGN_IDENTITY="iPhone Distribution: TECHNOLOGY IN PLAY LTD (K36DYL578K)" #证书配置
 export PROJECT_PATH=$(dirname $(dirname $0))
 M_XCODE_PATH=${PROJECT_PATH}/BuildIpa/hzq_ci_test  #XCODE工程目录路径
