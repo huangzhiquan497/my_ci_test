@@ -1,7 +1,7 @@
 #M_PROVISIONING_PROFILE="a8efop6a-33pt-5522-pokq-52d6d800aubv"#证书配置
 #M_CODE_SIGN_IDENTITY="iPhone Distribution: XXXXXX Technology INC. (XXXXXX)"#证书配置
 export PROJECT_PATH=$(dirname $(dirname $0))
-M_XCODE_PATH=${PROJECT_PATH}/BuildIpa  #XCODE工程目录路径
+M_XCODE_PATH=${PROJECT_PATH}/BuildIpa/hzq_ci_test  #XCODE工程目录路径
 M_XCODE_NAME="Unity-iPhone"
 M_ARCHIVE_PATH=${PROJECT_PATH}/archive
 M_EXPORT_PATH=${PROJECT_PATH}/ipa
