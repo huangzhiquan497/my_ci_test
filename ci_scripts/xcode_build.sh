@@ -31,22 +31,28 @@ echo "-------------------------clean-------------------------------------"
 cd $xcode_project_path  
 xcodebuild || exit  
  
+#echo "-------------------------archive  start-------------------------------------"
+ 
+#xcodebuild archive \
+#-scheme Unity-iPhone \
+#-configuration Release \
+#-archivePath ${archive_path} DEVELOPMENT_TEAM="${DEVELOPMENT_TEAM}" CODE_SIGN_IDENTITY="${M_CODE_SIGN_IDENTITY}" PROVISIONING_PROFILE="${M_PROVISIONING_PROFILE}" 
+
+ 
+ 
+#echo "-------------------------archive  End---------------------------------------"
+ 
+#echo "------------------------exportArchive  start--------------------------------"
+
+ 
+#xcodebuild -exportArchive \
+#-exportOptionsPlist ${xcode_project_path}/info.plist \
+#-archivePath ${archive_path} \
+#-exportPath ${xcode_project_path}
+
+echo "-------------------------build  start-------------------------------------"
+xcodebuild -project ${xcode_project_path}/Unity-iPhone.xcodeproj -scheme Unity-iPhone -configuration Release -allowProvisioningUpdates build
 echo "-------------------------archive  start-------------------------------------"
- 
-xcodebuild archive \
--project ${xcode_project_path}/Unity-iPhone.xcodeproj \
--scheme Unity-iPhone \
--configuration Release \
--archivePath ${archive_path} DEVELOPMENT_TEAM="${DEVELOPMENT_TEAM}" CODE_SIGN_IDENTITY="${M_CODE_SIGN_IDENTITY}" PROVISIONING_PROFILE="${M_PROVISIONING_PROFILE}" 
-
- 
- 
-echo "-------------------------archive  End---------------------------------------"
- 
+xcodebuild -project ${xcode_project_path}/Unity-iPhone.xcodeproj -scheme Unity-iPhone -configuration Release -allowProvisioningUpdates -archivePath ${archive_path} archive
 echo "------------------------exportArchive  start--------------------------------"
-
- 
-xcodebuild -exportArchive \
--exportOptionsPlist ${xcode_project_path}/info.plist \
--archivePath ${archive_path} \
--exportPath ${xcode_project_path}
+xcodebuild -exportArchive -allowProvisioningUpdates -archivePath ${archive_path} -exportPath Release -exportOptionsPlist ${xcode_project_path}/info.plist
