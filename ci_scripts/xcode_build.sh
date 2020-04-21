@@ -10,4 +10,4 @@ cd ${M_XCODE_PATH}
 
 xcodebuild clean archive -scheme ${M_XCODE_NAME} -target ${M_XCODE_NAME} -archivePath ${M_ARCHIVE_PATH} -configuration Release DEVELOPMENT_TEAM="${DEVELOPMENT_TEAM}" CODE_SIGN_IDENTITY="${M_CODE_SIGN_IDENTITY}" PROVISIONING_PROFILE="${M_PROVISIONING_PROFILE}" 
 
-xcodebuild -exportArchive -archivePath "${M_ARCHIVE_PATH}.xcarchive" -exportPath "${M_EXPORT_PATH}" -exportOptionsPlist "Info.plist" -allowProvisioningUpdates
+xcodebuild -exportArchive -archivePath "${M_ARCHIVE_PATH}.xcarchive" -exportPath "${M_EXPORT_PATH}" -exportOptionsPlist "Info.plist"
