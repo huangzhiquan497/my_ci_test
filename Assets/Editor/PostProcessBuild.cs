@@ -14,6 +14,18 @@ public class PostProcessBuild
     {
         if (buildTarget == BuildTarget.iOS)
         {
+        
+            //info.plist
+            string plistPath = pathToBuiltProject + "/Info.plist";
+            PlistDocument plist = new PlistDocument();
+            plist.ReadFromString(File.ReadAllText(plistPath));
+            PlistElementDict rootDict = plist.root;
+            PlistElementArray bgModes;
+            rootDict.SetString("method", "ad-hoc");
+
+
+            File.WriteAllText(plistPath, plist.WriteToString());
+
             //project settings
 
             string projPath = PBXProject.GetPBXProjectPath(pathToBuiltProject);
