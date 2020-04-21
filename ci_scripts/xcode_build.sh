@@ -19,13 +19,13 @@ export PROJECT_PATH=$(dirname $(dirname $0))
 xcode_project_path=${PROJECT_PATH}/BuildIpa/hzq_ci_test
  
 # build文件夹路径  
-build_path=${xcode_project_path}/BuildIpa  
+build_path=${PROJECT_PATH}/BuildIpa  
  
 archive_path=${build_path}/Archive/AutoBuild.xcarchive
  
 # 清理#
 xcodebuild clean
- 
+echo "-------------------------clean-------------------------------------" 
  
 # 编译工程  
 cd $xcode_project_path  
