@@ -36,7 +36,7 @@ echo "-------------------------archive  start-----------------------------------
 xcodebuild archive \
 -project ${xcode_project_path}/Unity-iPhone.xcodeproj \
 -scheme Unity-iPhone \
--configuration $build_type \
+-configuration Release \
 -archivePath ${archive_path}
  
  
