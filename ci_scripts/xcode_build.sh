@@ -37,7 +37,8 @@ xcodebuild archive \
 -project ${xcode_project_path}/Unity-iPhone.xcodeproj \
 -scheme Unity-iPhone \
 -configuration Release \
--archivePath ${archive_path}
+-archivePath ${archive_path} \
+-allowProvisioningUpdates
  
  
 echo "-------------------------archive  End---------------------------------------"
