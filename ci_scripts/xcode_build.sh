@@ -6,12 +6,10 @@ xcode_project_path=${PROJECT_PATH}/BuildIpa/hzq_ci_test
 build_path=${PROJECT_PATH}/BuildIpa  
  
 archive_path=${PROJECT_PATH}/Archive
-M_EXPORT_PATH=${PROJECT_PATH}/ipa
-if [ ! -d "$archive_path" ];then
+
+rm -rf $archive_path
 mkdir $archive_path
-else
-echo "文件夹已经存在"
-fi
+
 
 # 清理#
 xcodebuild clean
@@ -24,6 +22,6 @@ xcodebuild || exit
 echo "-------------------------build  start-------------------------------------"
 xcodebuild -project ${xcode_project_path}/Unity-iPhone.xcodeproj -scheme Unity-iPhone -configuration Release -allowProvisioningUpdates 
 echo "-------------------------archive  start-------------------------------------"
-xcodebuild -project ${xcode_project_path}/Unity-iPhone.xcodeproj -scheme Unity-iPhone -configuration Release -allowProvisioningUpdates -archivePath "${archive_path}/ci.xcarchive"
+xcodebuild -project ${xcode_project_path}/Unity-iPhone.xcodeproj -scheme Unity-iPhone -configuration Release archive -allowProvisioningUpdates -archivePath "${archive_path}/ci.xcarchive"
 echo "------------------------exportArchive  start--------------------------------"
-xcodebuild -exportArchive -allowProvisioningUpdates -archivePath "${archive_path}/ci.xcarchive" -exportPath ${M_EXPORT_PATH} -exportOptionsPlist ${xcode_project_path}/info.plist
+xcodebuild -exportArchive -allowProvisioningUpdates -archivePath "${archive_path}/ci.xcarchive" -exportPath "${archive_path}/ci.iap" -exportOptionsPlist ${xcode_project_path}/info.plist
