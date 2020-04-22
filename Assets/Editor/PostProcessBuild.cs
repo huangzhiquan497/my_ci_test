@@ -34,7 +34,6 @@ public class PostProcessBuild
             proj.ReadFromString(File.ReadAllText(projPath));
             string target = proj.GetUnityMainTargetGuid();
             
-            //proj.SetBuildProperty (target, "DEVELOPMENT_TEAM",  "9BXSA4V34W");
             proj.SetBuildProperty(target, "DEVELOPMENT_TEAM", "K36DYL578K");
             File.WriteAllText(projPath, proj.WriteToString());
         }

@@ -51,8 +51,8 @@ xcodebuild || exit
 #-exportPath ${xcode_project_path}
 
 echo "-------------------------build  start-------------------------------------"
-xcodebuild -project ${xcode_project_path}/Unity-iPhone.xcodeproj -scheme Unity-iPhone -configuration Release -allowProvisioningUpdates PROVISIONING_PROFILE="${M_PROVISIONING_PROFILE}"
+xcodebuild -project ${xcode_project_path}/Unity-iPhone.xcodeproj -scheme Unity-iPhone -configuration Release -allowProvisioningUpdates 
 echo "-------------------------archive  start-------------------------------------"
-xcodebuild -project ${xcode_project_path}/Unity-iPhone.xcodeproj -scheme Unity-iPhone -configuration Release -allowProvisioningUpdates -archivePath ${archive_path} PROVISIONING_PROFILE="${M_PROVISIONING_PROFILE}"
+xcodebuild -project ${xcode_project_path}/Unity-iPhone.xcodeproj -scheme Unity-iPhone -configuration Release -allowProvisioningUpdates -archivePath ${archive_path}
 echo "------------------------exportArchive  start--------------------------------"
 xcodebuild -exportArchive -allowProvisioningUpdates -archivePath ${archive_path} -exportPath Release -exportOptionsPlist ${xcode_project_path}/info.plist
