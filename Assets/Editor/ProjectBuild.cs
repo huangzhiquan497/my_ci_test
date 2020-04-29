@@ -96,7 +96,7 @@ public class ProjectBuild : Editor
 
         Directory.CreateDirectory(dir);
 
-
+        throw new Exception("fake exception");
         var apkName = $"{PackageName}_v{AppVersion}_b{buildVersion}.apk";
 
         var path = dir + "/" + apkName;
