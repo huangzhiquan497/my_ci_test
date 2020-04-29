@@ -1,4 +1,4 @@
- set -e
+
  echo "start"  
  
 #UNITY程序的路径
