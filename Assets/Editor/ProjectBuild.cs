@@ -13,6 +13,24 @@ public class ProjectBuild : Editor
     private static readonly string _build_version_file =
         Directory.GetCurrentDirectory() + "/BuildData/build_version.txt";
 
+
+    private static bool GetCommandLineVariable(string name, out string result)
+    {
+        result = null;
+
+        var args = Environment.GetCommandLineArgs();
+        foreach (var arg in args)
+        {
+            if (arg.StartsWith(name))
+            {
+                result = arg.Split('-')[1];
+                break;
+            }
+        }
+
+        return result != null;
+    }
+
     private static string GetBuildVersion()
     {
         if (!File.Exists(_build_version_file)) return "100";
